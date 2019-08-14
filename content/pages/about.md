@@ -3,10 +3,19 @@ title: "About me"
 template: "page"
 ---
 
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.
+## Code
 
-![Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi.](/media/image-2.jpg)
+I'm a Seattle-based full-stack software engineer who loves rigorous exception handling, efficient concurrent code, and fries with mayonnaise.
 
-*Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi.*
+![Sometimes I hike](/media/personal-1.jpg)
+*Sometimes I hike*
 
-Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
+Have a look at some of my projects and posts.
+
+## Music
+
+I play bass with [The Driftwood Walkers](https://thedriftwoodwalkers.com/).
+
+Sometimes I make music and put it on [SoundCloud](https://soundcloud.com/jonathan-mellman) or [YouTube](https://www.youtube.com/channel/UCoKNvLs9j6VBtKww7OsZ_rA/).
+
+I keep a [Spotify playlist](https://open.spotify.com/user/1242727868/playlist/74JYIKcLYVjm5oW2tMXNSH?si=lJQYbfEXTbqyjkl9k77gyw) of all the songs I've ever Shazaamed (from least to most recent).
