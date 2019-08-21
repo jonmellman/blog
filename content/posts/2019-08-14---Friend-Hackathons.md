@@ -82,5 +82,6 @@ So maybe the previous section resonated with you somewhat. You've had a lot of e
 	  1. With software, it's trivial to revert bad changes or go back to previous working versions. Hardware, on the other hand, needs to be rewired, which can be quite tedious.
 	  1. Software can be perfectly duplicated an infinite number of times. With our VeloPads on the other hand, we needed to physically construct each additional drum pad.
 	  1. Software is easier to debug. Granted, a lot of this is that my years in software development have biased me. But, I still find it annoying when circuits behave in non-intuitive ways.
+1. **Record a demo video at the end of the day.** I got a lot of joy out of showing friends our demo and hearing their thoughts and reactions. It also served as content for the technical blog post.
 
 I had a lot of fun and learned a lot in my friend-hackathon, so I encourage others to explore this concept. Let me know if you find a cool idea to hack on. Happy hacking!
