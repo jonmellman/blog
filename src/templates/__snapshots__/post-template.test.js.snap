@@ -84,14 +84,13 @@ exports[`PostTemplate renders correctly 1`] = `
           Test bio
           <a
             className="author__bio-twitter"
-            href="https://www.twitter.com/#"
+            href="mailto:#"
             rel="noopener noreferrer"
             target="_blank"
           >
             <strong>
-              Test name
+              Get in touch
             </strong>
-             on Twitter
           </a>
         </p>
       </div>
