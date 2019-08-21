@@ -46,6 +46,10 @@ Much to our dismay, no such things exist for dogs. At least, not that came up in
 
 ## How does it work?
 
+The source code is available [here](TODO).
+
+We used the [pycatfd](TODO) library to detect landmarks on cat faces. Then we modified an [open-source FaceNet implementation](TODO) to extract similar landmarks from human faces.
+
 ## Next steps
 
 * **Process the database of cat images.** This will involve writing an offline script to iterate over the cat images, extract their features, and store the landmarks along with a reference to the original image.

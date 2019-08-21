@@ -10,7 +10,7 @@ tags:
   - "Hackathon"
 ---
 
-Last Wednesday, my friend Micah and I had a "friend-hackathon" where we hacked together paper-thin and velocity-sensitive drum pad MIDI controllers. This non-technical post explores some of my thoughts and learnings on the friend-hackathon concept.
+Last Wednesday, my friend [Micah](http://micaharvey.com/) and I had a "friend-hackathon" where we hacked together paper-thin and velocity-sensitive drum pad MIDI controllers. This non-technical post explores some of my thoughts and learnings on the friend-hackathon concept.
 
 ![Micah Thinking](/media/velo-pads/micah1.jpg)
 _Micah pondering._

@@ -3,14 +3,16 @@ title: "About me"
 template: "page"
 ---
 
-## Code
-
-I'm a Seattle-based full-stack software engineer who loves rigorous exception handling, efficient concurrent code, and fries with mayonnaise.
+I'm a senior software engineer based in Seattle. I loves rigorous exception handling, efficient concurrency, and fries with mayonnaise.
 
 ![Sometimes I hike stuff](/media/personal-1.jpg)
 *Sometimes I hike stuff.*
 
-Have a look at some of my projects and posts.
+## Code
+
+I love TypeScript, NodeJS, Linux, ReactJS, and cloud services, with a 60/40 frontend-backend split.
+
+Have a look at some of my projects and posts, or check out my [resume](/media/resume.pdf).
 
 ## Music
 
