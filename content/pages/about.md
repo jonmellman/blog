@@ -7,8 +7,8 @@ template: "page"
 
 I'm a Seattle-based full-stack software engineer who loves rigorous exception handling, efficient concurrent code, and fries with mayonnaise.
 
-![Sometimes I write stuff](/media/personal-1.jpg)
-*Sometimes I write stuff.*
+![Sometimes I hike stuff](/media/personal-1.jpg)
+*Sometimes I hike stuff.*
 
 Have a look at some of my projects and posts.
 
