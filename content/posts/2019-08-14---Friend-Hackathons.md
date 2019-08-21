@@ -10,9 +10,9 @@ tags:
   - "Hackathon"
 ---
 
-Last Wednesday, my friend Micah and I had a friend-hackathon where we worked together to create paper-thin and velocity-sensitive drum pad MIDI controllers. This non-technical post explores some of my thoughts and learnings on the friend-hackathon concept. This post will focus more on some recent thoughts on friend-hackathons.
+Last Wednesday, my friend Micah and I had a friend-hackathon where we worked together to create paper-thin and velocity-sensitive drum pad MIDI controllers. This non-technical post explores some of my thoughts and learnings on the friend-hackathon concept.
 
-There will be an accompanying post on the actual technical details of this project, in case you want to make your own VeloPads.
+If you want to make your own VeloPads, see the accompanying post on the actual technical details of the project.
 
 ## Friend-hackathon? Did you make that up?
 
