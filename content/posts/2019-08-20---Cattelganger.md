@@ -50,7 +50,20 @@ The source code is available [here](TODO).
 
 We used the [pycatfd](TODO) library to detect landmarks on cat faces. Then we modified an [open-source FaceNet implementation](TODO) to extract similar landmarks from human faces.
 
-## Next steps
+<!-- TODO: Photo of cat feature annotation -->
+
+As you can see above, the pycatfd library made it easy to extract the cat face bounding box, as well as extract the locations of landmarks (TODO list of the landmarks).
+
+The FaceNet implementation we used extracted even more granular landmarks from human faces. We were able to find the average of these landmarks to get the same landmarks as pycatfd, which we need to compare the human and cat facial landmarks.
+
+The screen shot below shows the granular landmarks in green, and the coarse landmarks we derived from those in purple. The purple dots are what we will use to compare to the cat database.
+
+<!-- TODO: Photo of human feature annotation -->
+
+## Learnings
+A big takeaway is that with this project, and much of ML, it's hard to tell when the algorithm is working correctly. This is just a silly project, so
+
+## Next Up
 
 * **Process the database of cat images.** This will involve writing an offline script to iterate over the cat images, extract their features, and store the landmarks along with a reference to the original image.
 * **Improve the comparison algorithm.** Ours is a simple vector difference across the facial landmarks, but perhaps the algorithm can be tuned to favor, for example, distance between eyes.
