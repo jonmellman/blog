@@ -1,5 +1,5 @@
 ---
-title: 'Cattelganger: Finding your cat lookalike with Python'
+title: 'Cattelganger: Finding Your Cat Lookalike with Python'
 template: post
 slug: /posts/cattelganger
 date: "2019-08-29T16:12:20.214Z"
