@@ -2,6 +2,16 @@
 
 This repository is a [Gatsby](https://www.gatsbyjs.org/) project created from the fantastic [alxshelepenok/gatsby-starter-lumen](https://github.com/alxshelepenok/gatsby-starter-lumen) template and hosted via [Netlify](https://www.netlify.com/).
 
+## Development
+
+Simply write content in the `content/` directory, following existing templates.
+
+To launch a dev server with live reload:
+
+```sh
+gatsby develop
+```
+
 ## License
 The MIT License (MIT)
 
