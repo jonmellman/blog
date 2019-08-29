@@ -17,7 +17,7 @@ Last night, I was watching [this great LJS video](https://www.youtube.com/watch?
 
 I then realized how I could get an endless supply of simple, clear jazz recordings. In this post I'll explain how, as well as a possible practice routine for getting better at learning jazz progressions by ear.
 
-First, I'll describe my experience with jazz ear training and explain why, despite it's obvious importance, it's been such an elusive practice subject for me.
+First, I'll describe my experience with jazz ear training and explain why, despite its obvious importance, it's been such an elusive practice subject for me.
 
 ## An Anecdote
 
