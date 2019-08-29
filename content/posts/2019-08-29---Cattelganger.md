@@ -1,10 +1,10 @@
 ---
-title: 'Cattelganger: Finding your cat lookalike with ML and Python'
+title: 'Cattelganger: Finding your cat lookalike with Python'
 template: post
 slug: /posts/cattelganger
 date: "2019-08-29T16:12:20.214Z"
 draft: false
-description: 'A hackathon to build human/cat face comparison'
+description: 'Hacking together human/cat face comparison using Python, ML, Computer Vision, and TensorFlow'
 category: Tech
 tags:
   - "Hackathon"
