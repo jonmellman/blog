@@ -5,7 +5,7 @@ slug: /posts/hackathon-1
 date: "2019-08-14T23:46:37.121Z"
 draft: false
 description: 'This post focuses on some of my thoughts on the concept of friend-hackathons'
-category: Tech
+category: Misc
 tags:
   - "Hackathon"
 ---
