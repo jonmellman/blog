@@ -15,7 +15,7 @@ tags:
 
 ![Side-by-side of feature extraction](/media/cattelganger/both_annotated.png)
 
-In another recent [friend-hackathon](/posts/hackathon-1), my friend Kristian and I met up to build something cool: a script that finds your cat lookalike.
+In another recent [friend-hackathon](/posts/hackathon-1), my friend [Kristian](https://hartikainen.github.io/) and I met up to build something cool: a script that finds your cat lookalike.
 
 By the end of the day we had written a script that detects human facial features from a photo and compares them to a set of extracted cat facial features. Sure, this set contained data from only two cats, but, hey, it's a proof of concept.
 
@@ -115,7 +115,7 @@ The purple dots are the landmarks that can be directly compared to the landmarks
 
 ### Human/Cat Comparison
 
-We used a very simple algorithm here. With the locations of comparable landmarks, we compared the human landmarks to those of each cat by calculating the difference. Whichever cat had the least difference was deemed the most similar cat.
+We used a very simple algorithm for the comparison (no ML). With the locations of comparable landmarks, we compared the human landmarks to those of each cat by calculating the difference. Whichever cat had the least difference was deemed the most similar cat.
 
 
 
