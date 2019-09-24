@@ -16,8 +16,8 @@ Have a look at some of my projects and posts, or check out my [resume](/media/re
 
 ## Music
 
+Sometimes I make music and put it on [YouTube](https://www.youtube.com/channel/UCoKNvLs9j6VBtKww7OsZ_rA/) or [SoundCloud](https://soundcloud.com/jonathan-mellman).
+
 I play bass with [The Driftwood Walkers](https://thedriftwoodwalkers.com/).
 
 I keep a [Spotify playlist](https://open.spotify.com/user/1242727868/playlist/74JYIKcLYVjm5oW2tMXNSH?si=lJQYbfEXTbqyjkl9k77gyw) of all the songs I've ever Shazaamed (from least to most recent).
-
-Sometimes I make music and put it on [SoundCloud](https://soundcloud.com/jonathan-mellman) or [YouTube](https://www.youtube.com/channel/UCoKNvLs9j6VBtKww7OsZ_rA/).
