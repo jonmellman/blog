@@ -34,7 +34,9 @@ module.exports = {
       twitter: '',
       github: 'jonmellman/',
       rss: '',
-      vkontakte: ''
+      vkontakte: '',
+      linkedin: 'https://www.linkedin.com/in/jon-mellman/',
+      youtube: 'https://www.youtube.com/channel/UCoKNvLs9j6VBtKww7OsZ_rA/featured'
     }
   }
 };

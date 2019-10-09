@@ -18,6 +18,8 @@ const useSiteMetadata = () => {
                 github
                 rss
                 vkontakte
+                linkedin
+                youtube
               }
             }
             menu {
