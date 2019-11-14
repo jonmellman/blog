@@ -6,7 +6,7 @@ module.exports = {
   title: 'Blog by Jon Mellman',
   subtitle: 'Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.',
   copyright: '© All rights reserved.',
-  disqusShortname: '',
+  disqusShortname: 'jonmellman',
   postsPerPage: 4,
   googleAnalyticsId: 'UA-149687332-1',
   useKatex: false,
