@@ -4,10 +4,10 @@ module.exports = {
   url: 'https://lumen.netlify.com',
   pathPrefix: '/',
   title: 'Blog by Jon Mellman',
-  subtitle: 'Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.',
+  subtitle: 'Posts by Seattle-based software developer, musician, and occasional blogger.',
   copyright: '© All rights reserved.',
   disqusShortname: 'jonmellman',
-  postsPerPage: 4,
+  postsPerPage: 5,
   googleAnalyticsId: 'UA-149687332-1',
   useKatex: false,
   menu: [
