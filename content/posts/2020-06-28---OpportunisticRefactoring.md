@@ -18,9 +18,7 @@ In this post, I explain the Fowler passages that resonated with me. I also add c
 
 On the developer level, opportunistic refactoring is about leaving code better than you found it.
 
-On the systemic level, it's about promoting a culture where developers continuously make small, positive improvements that curb [software entropy](https://en.wikipedia.org/wiki/Software_entropy).
-
-In my experience, a strong developer culture of opportunistic refactoring is inversely correlated with [software rot](https://en.wikipedia.org/wiki/Software_rot).
+On the systemic level, it's about promoting a culture where developers continuously make small, positive improvements that curb [software entropy](https://en.wikipedia.org/wiki/Software_entropy) and [software rot](https://en.wikipedia.org/wiki/Software_rot).
 
 ## Benefits Compound
 
@@ -30,7 +28,7 @@ Fowler says:
 
 Here, by "repeated applications will make a big impact", Fowler is talking about compounding effects:
 
-- If we take a minute now to rename a confusingly-named variable, we make it easier for t1he next person to refactor the method signature.
+- If we take a minute now to rename a confusingly-named variable, we make it easier for the next person to refactor the method signature.
 - When they refactor the method signature, it's easier for the next person to notice functional similarities between this class and another, and combine them.
 - When they combines these classes, our design simplifies and the next person can more easily implement their new feature.
 - And so on...
