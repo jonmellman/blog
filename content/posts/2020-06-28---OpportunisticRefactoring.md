@@ -62,6 +62,7 @@ Here are some sources of friction that I've seen:
 - Overly-aggressive code reviews, where scope is increased by well-meaning but unrelated improvements. ("While you're touching this file, let's reorganize the imports")
 - Poor test coverage, so developers need more time to be confident their refactor is safe.
 - Lack of ownership. If developers don't think they'll reap the future rewards of the refactor, they'll be less inclined to refactor. This happens when developers are frequently swapped between codebases.
+- So much technical debt that even opportunistic refactors are expensive ("Where do I even start?"). These situations may warrant a planned refactor to unblock opportunistic refactoring.
 
 Any of the above impacts the pace of opportunistic refactors and interferes with the compounding benefits.
 
