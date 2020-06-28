@@ -10,7 +10,7 @@ tags:
   - "Code"
 ---
 
-I only just discovered the excellent [Martin Fowler article on Opportunistic Refactoring](https://martinfowler.com/bliki/OpportunisticRefactoring.html). It names and describes a concept I've been thinking a lot about recently. I was excited to learn that Fowler seems to share many of my mental models and intuitions :)
+I only just discovered the excellent [Martin Fowler article on Opportunistic Refactoring](https://martinfowler.com/bliki/OpportunisticRefactoring.html). It names and defines a concept I've been thinking a lot about recently. I was excited to learn that Fowler seems to share many of my mental models and intuitions :)
 
 In this post, I explain the Fowler passages that resonated with me. I also add commentary from my professional experience using opportunistic refactors to maintain software.
 
