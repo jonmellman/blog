@@ -3,7 +3,7 @@ title: "About me"
 template: "page"
 ---
 
-I'm a senior software engineer based in Seattle, Washington. I loves rigorous exception handling, efficient concurrency, and fries with mayonnaise.
+I'm a senior software engineer based in Seattle, Washington. I love rigorous exception handling, efficient concurrency, and fries with mayonnaise.
 
 ![Sometimes I hike stuff](/media/personal-1.jpg)
 *Sometimes I hike stuff.*
