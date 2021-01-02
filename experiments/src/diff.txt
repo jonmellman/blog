@@ -1,0 +1,27 @@
+diff --git a/experiments/src/a.ts b/experiments/src/a.ts
+index c653acd..762b750 100644
+--- a/experiments/src/a.ts
++++ b/experiments/src/a.ts
+@@ -1,17 +1,16 @@
+ class DbClient {
+-  private isConnected: boolean;
++  private connectionPromise: Promise<void> | null;
+ 
+   constructor() {
+-    this.isConnected = false;
++    this.connectionPromise = null;
+   }
+ 
+   private async connect() {
+-    if (this.isConnected) {
+-      return;
++    if (!this.connectionPromise) {
++      this.connectionPromise = connectToDatabase(); // stub
+     }
+ 
+-    await connectToDatabase(); // stub
+-    this.isConnected = true;
++    return this.connectionPromise;
+   }
+ 
+   public async getRecord(recordId: string) {
