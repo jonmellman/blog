@@ -10,12 +10,12 @@ class DbClient {
       return;
     }
 
-    await connectToDatabase();
+    await connectToDatabase(); // stub
     this.isConnected = true;
   }
 
   public async getRecord(recordId: string) {
     await this.connect();
-    await getRecord(recordId);
+    return getRecordFromDatabase(recordId); // stub
   }
 }
