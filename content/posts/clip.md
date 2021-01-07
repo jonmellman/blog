@@ -12,7 +12,7 @@ tags:
 
 For the past few years (and I'm not sure where I found it), I've kept the following in my .zshrc:
 
-```sh
+```bash
 function clip {
 	[ -t 0 ] && pbpaste || pbcopy;
 }
@@ -28,4 +28,4 @@ cat output.json | clip
 clip > output.json
 ```
 
-I wish I could remember where I found it - I know I didn't come up with it myself. If you know the origin, let me know so I can give credit where it's due.
+I think I found this on hacker news somewhere, but I don't remember specifically. If you know the origin, let me know so I can give credit where it's due.

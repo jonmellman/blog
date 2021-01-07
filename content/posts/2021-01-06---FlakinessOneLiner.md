@@ -1,43 +1,45 @@
 ---
 title: "Measuring Test Flakiness with a Bash One-Liner"
 template: post
-slug: /posts/one-liner-measuring-flakiness
+slug: /posts/flakiness-one-liner
 date: "2021-01-07T03:34:08.453Z"
-draft: true
+draft: false
 description: "How do you know that you've really fixed the flakiness? How about some cold hard data."
 category: Tech
 tags:
   - "Code"
 ---
 
-# Measuring Test Flakiness with a Bash One-Liner
+I've had to fix a handful of flaky test suites lately. It's a pain[^1].
 
-Lately, I've had to fix a handful of flaky test suites[^1]. The problem is not reproducible, so how do you know if you've fixed it or just gotten lucky in your test run? There's nothing worse than declaring a problem fixed only to have a teammate's next build fail for the same reason.
+Flakiness isn't reproducible by definition, so how do you know if you've actually fixed it? If there's more than one problem, how do you know if you've made any improvement at all?
 
-Here's the one-liner I've been using to measure flakiness:
+Here's the one-liner I've been using to measure flake rate:
 
 <!-- Lower font size to prevernt the one-liner from overflowing -->
 <style>
-div pre code.language-sh {
+div pre code.language-bash {
   font-size: 13px !important;
 }
 </style>
 
-```sh
+```bash
 while true; do yarn test && echo 0 >> results.txt || echo 1 >> results.txt; done
 ```
 
-Of course, substitute `yarn test` for whatever your test command is.
+(Of course, substitute `yarn test` for the command that runs your tests.)
 
 ## Explanation
 
-Maybe it needs no explanation, but I'll give one anyway. It repeatedly runs tests, appending a 0 to `results.txt` on success and a 1 on failure.
+Maybe it needs no explanation, but I'll give one anyway. It repeatedly runs tests, appending a 0 to `results.txt` on success and a 1 on failure. Let it run for a while, then derive your flake rate.
 
-When terminated, you'll have a file that tells you the approximate flakiness rate. I run it before attempting any fixes (my "control group") and after (my "treatment group") and compare the flakiness rates. Now I have solid data I can add to my pull request.
+I collect data before attempting a fix (my control group) and again after (my treatment group). This quantifies both the problem and the improvement. Plus, hard numbers in PR descriptions always make you look smart.
 
-Probably this method is a lifesaver for some readers and primitive to others. I'd love to hear from you whichever camp you're in. What methods do you use for resolving test flakiness?
+Sometimes you learn something surprising. Maybe there was a 9% flake rate, and even after the big refactor everyone's been clamoring for, there's still a 2% flake rate.
+
+What are other practical tips for fixing flakiness? I'd love to hear your tools and tactics.
 
 [^1]:
-  * Problem 1: shared, mutable test state, and tests have inconsistent (sometimes bad) cleanup behavior. Solution: Add a hook so the test runner guarantees clean database state for each test.
-  * Problem 2: Testing the failure condition for code that retries using exponential backoff. Solution: sinon's [`await clock.runAllAsync()`](https://github.com/sinonjs/fake-timers), which is magical.
-  * Problem 3: Tests for a logger invoke the logger and immediately assert against the log file, when the logs may not all be flushed to disk yet. Solution: Add a 20ms sleep to the assertion helper. Hey, we're pragmatic :)
+  * Problem 1: Shared, mutable state across a large test suite and poor test isolation. Solution: Add a hook so the test runner guarantees clean state for each test.
+  * Problem 2: Testing the failure condition for code that retries using exponential backoff and jitter. Solution: SinonJS's [`await clock.runAllAsync()`](https://github.com/sinonjs/fake-timers), which is magical and lets us avoid nondeterministic assertion polling.
+  * Problem 3: Tests for a logger that assert against the log file, which may not be flushed to disk yet. Solution: Add a 20ms sleep to the assertion helper. Hey, we're pragmatic :)
