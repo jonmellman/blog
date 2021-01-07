@@ -24,10 +24,10 @@ div pre code.language-bash {
 </style>
 
 ```bash
-while true; do yarn test && echo 0 >> results.txt || echo 1 >> results.txt; done
+while true; do npm test && echo 0 >> results.txt || echo 1 >> results.txt; done
 ```
 
-(Of course, substitute `yarn test` for the command that runs your tests.)
+(Of course, substitute `npm test` for the command that runs your tests.)
 
 ## Explanation
 
