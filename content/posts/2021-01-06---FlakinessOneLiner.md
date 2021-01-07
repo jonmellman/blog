@@ -1,16 +1,16 @@
 ---
-title: "Bash One-liner for Measuring Test Flakiness"
+title: "Measuring Test Flakiness with a Bash One-Liner"
 template: post
 slug: /posts/one-liner-measuring-flakiness
 date: "2021-01-07T03:34:08.453Z"
-draft: true
+draft: false
 description: "How do you know that you've really fixed the flakiness? How about some cold hard data."
 category: Tech
 tags:
   - "Code"
 ---
 
-# Bash One-liner for Shaking Out Flakes
+# Measuring Test Flakiness with a Bash One-Liner
 
 Lately, I've had to fix a handful of flaky test suites[^1]. The problem is not reproducible, so how do you know if you've fixed it or just gotten lucky in your test run? There's nothing worse than getting a "fix" through code review only to have a teammate's next build fail for the same reason.
 
