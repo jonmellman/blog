@@ -16,15 +16,15 @@ Flakiness isn't reproducible by definition, so how do you know if you've actuall
 
 Here's the one-liner I've been using to measure flake rate:
 
-<!-- Lower font size to prevernt the one-liner from overflowing -->
+<!-- Lower font size to prevent the one-liner from overflowing -->
 <style>
 div pre code.language-bash {
-  font-size: 13px !important;
+  font-size: 14px !important;
 }
 </style>
 
 ```bash
-while true; do npm test && echo 0 >> results.txt || echo 1 >> results.txt; done
+while; do npm test && echo 0 >> results.txt || echo 1 >> results.txt; done
 ```
 
 (Of course, substitute `npm test` for the command that runs your tests.)
