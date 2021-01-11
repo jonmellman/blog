@@ -10,7 +10,7 @@ tags:
   - "Code"
 ---
 
-In this post, we'll show how a common caching implementation exposes a race condition. We'll then show how to fix it, and (unlike most optimizations) we'll _simplify_ our implementation in the process.
+In this post, we'll show how a common caching implementation exposes a race condition. We'll then show how to fix it, and (unlike most optimizations) we'll simplify our code in the process.
 
 We'll do this by introducing the Promise Memoization pattern, which builds on the [Singleton Promise](/posts/singleton-promises) pattern.
 
@@ -93,11 +93,11 @@ Note that we no longer declare our method `async`, since it no longer calls `awa
 
 This fixes the race condition. Regardless of timing, only one network request fires when we make multiple calls to `getUserById('user1')`. This is because all subsequent callers receive the same singleton promise as the first.
 
-Problem solved! Now we're ready for the general insight.
+Problem solved! Now let's take a step back.
 
 ## Promise Memoization
 
-Seen from another angle, the final caching implementation is literally just [memoizing](https://en.wikipedia.org/wiki/Memoization) `getUserById`! When given an input we've already seen before, we return the same result (which happens to be a promise) without doing any work.
+Seen from another angle, our last caching implementation is literally just [memoizing](https://en.wikipedia.org/wiki/Memoization) `getUserById`! When given an input we've already seen, we simply return the result that we stored (which happens to be a promise).
 
 So, _memoizing_ our async method gave us caching without the race condition.
 
@@ -114,12 +114,12 @@ const getUserById = _.memoize(async (userId: string): Promise<User> => {
 });
 ```
 
-We took our original cache-less implementation and dropped in the `_.memoize` wrapper! Very simple and uninvasive.
+We took our original cache-less implementation and dropped in the `_.memoize` wrapper! Very simple and noninvasive.
 
 (For production use cases, you'll probably want something like [`memoizee`](https://www.npmjs.com/package/memoizee) that lets you control the caching strategy.)
 
 ## Conclusion
 
-In this post, we learned that we can use memoization wrappers around our async methods.
+In this post, we saw how we can use memoization wrappers around our async methods.
 
 While this approach is _simpler_ than manually populating a result cache, we also learned that it's _better_ because it avoids a common race condition.
