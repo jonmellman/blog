@@ -116,10 +116,31 @@ const getUserById = _.memoize(async (userId: string): Promise<User> => {
 
 We took our original cache-less implementation and dropped in the `_.memoize` wrapper! Very simple and noninvasive.
 
-(For production use cases, you'll probably want something like [`memoizee`](https://www.npmjs.com/package/memoizee) that lets you control the caching strategy.)
+(For production use cases, you'll ~~probably~~ definitely want something like [`memoizee`](https://www.npmjs.com/package/memoizee) that lets you control the caching strategy.)
+
+Update: In production, you should absolutely be using [`memoizee`](https://www.npmjs.com/package/memoizee) with the `promise: true` flag to avoid caching errors. See [my update](#update-115-error-handling) for details.
 
 ## Conclusion
 
 In this post, we saw how we can use memoization wrappers around our async methods.
 
 While this approach is _simpler_ than manually populating a result cache, we also learned that it's _better_ because it avoids a common race condition.
+___
+## Update 1/15: Error Handling
+
+A lot of folks have reached out to ask about error handling, which is a great question that I absolutely should have explained in the original post!
+
+Especially in the case of API clients, you should consider the possibility that an operation may fail. If our memoization implementation has cached a rejected promise, then all future calls will reject with this same failed promise!
+
+Therefore, it's very important to evict rejected promises from the memoization cache.
+
+Fortunately, [`memoizee`](https://github.com/medikoo/memoizee#promise-returning-functions) supports this out of the box. Our final example becomes:
+
+```ts
+import memoize from 'memoizee';
+
+const getUserById = memoize(async (userId: string): Promise<User> => {
+  const user = await request.get(`https://users-service/${userId}`);
+  return user;
+}, { promise: true});
+```
