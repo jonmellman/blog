@@ -35,7 +35,7 @@ module.exports = {
       github: 'jonmellman/',
       rss: '',
       vkontakte: '',
-      linkedin: 'https://www.linkedin.com/in/jon-mellman/',
+      linkedin: 'https://www.linkedin.com/in/jonmellman/',
       youtube: 'https://www.youtube.com/channel/UCoKNvLs9j6VBtKww7OsZ_rA/featured'
     }
   }
