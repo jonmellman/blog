@@ -15,8 +15,8 @@ app.get('/api/users', async (req, res) => {
   res.status(200).json(users);
 });
 
-// public/index.html will be loaded on requests to '/'
-app.use(express.static(path.join(__dirname, 'public')));
+// `public/index.html` will be loaded on requests to `/`.
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.listen(3000);
 console.log('Local server running on: http://localhost:3000');
