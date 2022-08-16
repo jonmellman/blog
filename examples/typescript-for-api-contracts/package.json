@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "type-check:client": "tsc -p ./client",
-    "build:client": "yarn type-check:client && esbuild ./client --bundle --outfile=dist/out.js"
+    "build:client": "yarn type-check:client && esbuild ./client --bundle --outfile=server/public/bundle.js",
+    "start:server": "yarn ts-node ./server/app.ts"
   },
   "devDependencies": {
     "@tsconfig/create-react-app": "^1.0.2",
