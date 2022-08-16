@@ -5,8 +5,8 @@
   "author": "Jon Mellman",
   "license": "MIT",
   "scripts": {
-    "tsc:client": "tsc -p ./client",
-    "build:client": "esbuild ./client --bundle --outfile=dist/out.js"
+    "type-check:client": "tsc -p ./client",
+    "build:client": "yarn type-check:client && esbuild ./client --bundle --outfile=dist/out.js"
   },
   "devDependencies": {
     "@tsconfig/create-react-app": "^1.0.2",
