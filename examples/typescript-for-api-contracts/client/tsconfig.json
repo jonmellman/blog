@@ -5,6 +5,7 @@
   ],
   "compilerOptions": {
     "outDir": "../dist",
-    "noEmit": false
+    "noEmit": false,
+    "target": "es6" // esbuild doesn't support es5
   }
 }
