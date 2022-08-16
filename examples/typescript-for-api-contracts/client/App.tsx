@@ -1,2 +1,3 @@
-export const App = () => <div>Hello World</div>;
-console.log('test');
+export function App() {
+  return <div>Hello World</div>;
+}

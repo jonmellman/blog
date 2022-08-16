@@ -5,7 +5,8 @@
   "author": "Jon Mellman",
   "license": "MIT",
   "scripts": {
-    "type-check:client": "tsc -p ./client",
+    "typecheck:client": "tsc -p ./client --noEmit",
+    "typecheck:server": "tsc -p ./server --noEmit",
     "build:client": "yarn type-check:client && esbuild ./client --bundle --outfile=server/public/bundle.js",
     "start:server": "yarn ts-node ./server/app.ts"
   },
