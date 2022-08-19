@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import * as api from './api';
+import { User } from '../shared-types/api/user';
 
 export const App: React.FC = () => {
-  const [users, setUsers] = useState<any>([]);
+  const [users, setUsers] = useState<User[]>([]);
   useEffect(() => {
     const load = async () => {
-      setUsers(await api.listUsers());
+      setUsers(await api.getUsers());
     };
     load();
   }, []);
@@ -15,6 +16,9 @@ export const App: React.FC = () => {
       Hello World -
       {' '}
       {JSON.stringify(users)}
+      <ol>
+        {users.map((user) => <li>{user.name}</li>)}
+      </ol>
     </div>
   );
 };
