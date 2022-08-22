@@ -12,7 +12,7 @@ _Sometimes I hike stuff._
 
 I love TypeScript, Node.js, React, Docker, and cloud services, with a 60/40 frontend-backend split.
 
-Have a look at some of my projects and posts, or check out my [resume](/media/resume.pdf).
+Have a look at some of my projects and posts, or check out my [resume](/media/JonMellman_Resume.pdf).
 
 ## Music
 
