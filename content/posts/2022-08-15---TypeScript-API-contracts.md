@@ -1,8 +1,8 @@
 ---
 title: 'Advanced TypeScript Patterns: API Contracts'
 template: post
-slug: /posts/typescript-for-api-contracts-1
-date: '2022-08-16T00:58:42.270Z'
+slug: /posts/typescript-for-api-contracts
+date: '2022-08-22T00:58:42.270Z'
 draft: false
 description: 'Using TypeScript to eliminate a class of bugs by guaranteeing compatibility between your API client and server.'
 category: Tech
