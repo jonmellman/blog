@@ -1,44 +1,59 @@
 ---
-title: "Advanced TypeScript Patterns: API Contracts"
+title: 'Advanced TypeScript Patterns: API Contracts'
 template: post
-slug: /posts/typescript-for-api-contracts
-date: "2022-08-16T00:58:42.270Z"
-draft: true
-description: "Getting the most out of TypeScript"
+slug: /posts/typescript-for-api-contracts-1
+date: '2022-08-16T00:58:42.270Z'
+draft: false
+description: 'Using TypeScript to eliminate a class of bugs by guaranteeing compatibility between your API client and server.'
 category: Tech
 tags:
-  - "Code"
+  - 'Code'
 ---
 
-TypeScript is one of the [most loved programming languages](https://insights.stackoverflow.com/survey/2021#most-loved-dreaded-and-wanted-language-love-dread), yet I often see teams miss opportunities to use it more effectively. In this post, we'll look at how we can eliminate a class of bugs by enforcing REST API contracts in full-stack TypeScript applications.
+<style>
+div pre code.language-ts {
+  font-size: 15px !important;
+}
 
-A "contract" here is simply a specification of what data the API sends and receives. We'll write an API spec in TypeScript that both the client and server understand and enforce.
+div pre code.language-diff {
+  font-size: 15px !important;
+}
+</style>
 
-When we guarantee that the client and server are both complying to the same spec, our code _simply won't compile_ if there's any mismatch between what the client is sending and what the server is expecting, and vice versa.
+TypeScript is one of the [most loved programming languages](https://insights.stackoverflow.com/survey/2021#most-loved-dreaded-and-wanted-language-love-dread), yet I often see teams miss opportunities to leverage it. In this post, we'll explore an approach to writing pragmatic API contracts in TypeScript that eliminate an entire class of bugs.
 
-## General Idea
+## What & Why
 
-The idea is simple: we'll create an API spec in TypeScript, and then reference it in both the client and server code.
+A "contract" here is simply a common specification of what data the API sends and receives.
 
-This post will use [axios](npmjs.com/package/axios) and [express](npmjs.com/package/express) for the API client and server libraries respectively, though the approach generalizes to any library that supports types.
+When the client and server both reference the same TypeScript spec, we've codified the spec as a contract. At that point, our code _simply won't compile_ if there's any mismatch between what the client is sending and what the server is expecting, and vice versa.
 
-The first step is to realize that your API client library and server framework already _support type parameters_. I'm surprised by how often developers don't realize this or don't know how to use them. (To be fair, the type implementations can be intimidating - see [axios's](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/express-serve-static-core/index.d.ts#L122-L175) and [express's](https://github.com/axios/axios/blob/649d739288c8e2c55829ac60e2345a0f3439c730/index.d.ts#L350-L369).)
+This forces the client and server to evolve in lockstep, making it impossible e.g. for the client to reference nonexistent properties, or for the server to remove properties the client depends on.
 
-## Understand the Type Parameters
+_This post will use [axios](npmjs.com/package/axios) and [express](npmjs.com/package/express) for the API client and server libraries respectively, though the approach generalizes to any library that supports types._
 
-The next step is to actually understand and _use_ the type parameters. This takes some digging and experimentation with your libraries, so I'll just tell you:
+_If you want to skip to the code, I have [an example repository set up here](https://github.com/jonmellman/blog-examples/tree/master/typescript-for-api-contracts)._
 
-1. `axios` requests takes a type representing the response data
+## Understand Your Type Parameters
+
+The first step is to realize that your API client library and server framework _already support type parameters_. I'm surprised by how often developers don't realize this or don't know how to use them.
+
+(To be fair, the type implementations can be intimidating - see [axios's](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/express-serve-static-core/index.d.ts#L122-L175) and [express's](https://github.com/axios/axios/blob/649d739288c8e2c55829ac60e2345a0f3439c730/index.d.ts#L350-L369). And while there are actually libraries that don't support type parameters, there are workarounds.)
+
+The next step is to actually understand the type parameters. This takes some digging and experimentation with your libraries, so I'll just tell you:
+
+1. `axios` requests takes a type representing the response data.
 2. `express` API routes take types representing the path parameters, response body, request body, and query parameters.
 
-Now we can start using these type parameters in a simple example.
+## Type Parameters: Axios
 
-## Simple Example - Axios
+Now we can start using these type parameters in a simple example: an API like `GET /api/users/:userId`.
 
-Consider:
+The API client might look like:
 
 ```ts
-import axios from "axios";
+// client/api/users.ts
+import axios from 'axios';
 
 type User = {
   userId: number;
@@ -58,13 +73,15 @@ export const getUser = async (userId: number): Promise<User> => {
 
 Very straightforward. We told Axios the data type, and now it's enforced by the compiler.
 
-## Simple Example - Express
+## Type Parameters: Express
 
 On the `express` side, it's a little more complicated. But not much.
 
 Consider:
 
+<!-- prettier-ignore -->
 ```ts
+// server/routes/users.ts
 type User = {
   userId: number;
   name: string;
@@ -72,8 +89,11 @@ type User = {
 
 export const usersRouter = express.Router();
 
-usersRouter.get</* path params: */ { userId: number }, /* response: */ User>(
-  "/api/users/:userId",
+usersRouter.get<
+  /* path params: */ { userId: number },
+  /* response: */ User
+>(
+  '/api/users/:userId',
   async (req, res) => {
     // 🚫 Property 'id' does not exist on type '{ userId: number; }'
     const { id } = req.params;
@@ -91,15 +111,15 @@ usersRouter.get</* path params: */ { userId: number }, /* response: */ User>(
 );
 ```
 
-The compiler now makes sure we're accessing defined path parameters and that we're returning the expected data type to the client.
+Great - the compiler now makes sure we're accessing defined path parameters and that we're returning the expected data type to the client.
 
 ## Extracting a TypeScript API spec
 
-The client and server types behave how we want, but the types are duplicated in each. This is a big problem, since when the types drift apart it will cause bad bugs.
+It's good that the client and server types now behave correctly, but each duplicates its own version of the types! This means the compiler can't warn us about contract violations _at the client/server boundary_, which is where violations are likely to take place.
 
 So, the next step is to extract a single API spec that both client and server can reference.
 
-For simplicity, let's create a sibling `shared-types/` directory alongside the existing `client/` and `server/` directories. Then let's make a `UsersApi.ts` file for our API spec:
+For simplicity, let's create a sibling `shared-types/` directory alongside existing `client/` and `server/` directories. Then let's make a `UsersApi.ts` file for our API spec:
 
 ```diff
 client/
@@ -108,11 +128,10 @@ server/
 +   UsersApi.ts
 ```
 
-We know that we need the API's response body for both Axios and Express, and the path params for Express, so let's represent those:
+Let's represent the API response body, as well as the Express path params:
 
 ```ts
 // shared-types/UsersApi.ts
-
 export type User = {
   userId: number;
   name: string;
@@ -126,43 +145,48 @@ export type GetUserApi = {
 };
 ```
 
-Some small notes:
+Of course, this is a _very_ lightweight and pragmatic API spec. It's not comprehensive in the way an [OpenAPI](https://swagger.io/specification/) spec would be, but it's disproportionately valuable.
 
-1. For now, the `User` type is defined in the same file as the API. We'll see later why this isn't always ideal.
-2. We nest the `PathParams` and `ResponseBody` type under a `GetUserApi` type. This is purely a convention for organization - use whatever convention makes sense for you.
+Some notes:
+
+1. We nest the `PathParams` and `ResponseBody` type inside a `GetUserApi` type. This is purely a convention for organization. Use whatever convention makes sense for you.
+1. You shouldn't need to modify your build process to reference this file from client code - it exclusively contains type definitions, which are erased during compilation. (You can even import it in `create-react-app` applications, which typically [don't let you import from outside your client's source directory](https://stackoverflow.com/questions/44114436/the-create-react-app-imports-restriction-outside-of-src-directory).)
+1. It's not always a good idea to colocate your application model types, like `User`, with their respective API contracts. For example, if other APIs referenced `User`, we'd want to reorganize and extract that type.
 
 ## Integrating with the API spec
 
-Our client code now becomes:
+Now that we have a dedicated TypeScript API contract, our client code can become:
 
 ```ts
-import axios from "axios";
-import { GetUserApi, User } from "../shared-types/UsersApi";
+// client/api/users.ts
+import axios from 'axios';
+import { GetUserApi, User } from '../shared-types/UsersApi';
 
 export const getUser = async (userId: number): Promise<User> => {
-  const { data } = await axios.get<GetUserApi["ResponseBody"]>(
+  const { data } = await axios.get<GetUserApi['ResponseBody']>(
     `/api/users/${userId}`
   );
   return data;
 };
 ```
 
-Note that the `getUser` method signature references the `User` type, while the implementation reference the `GetUserApi['ResponseBody']` type. Both types are equivalent for now, but we make a distinction to maintain our abstractions. The _implementation_ is what knows about the API spec and prevents API spec types from leaking into the rest of the client code. It's a subtle point, but as the business logic grows you'll be glad to have this separation.
+A subtle point: The `getUser` method signature references the `User` type, while the implementation references the equivalent `GetUserApi['ResponseBody']` type. By _encapsulating the API contract within the client implementation_, we allow the rest of the application to use the simpler `User` type.
 
 And our server code:
 
 <!-- prettier-ignore -->
 ```ts
-import express from "express";
-import { GetUserApi, GetUsersApi } from "../shared-types/UsersApi";
+// server/routes/users.ts
+import express from 'express';
+import { GetUserApi, GetUsersApi } from '../shared-types/UsersApi';
 
 export const usersRouter = express.Router();
 
 usersRouter.get<
-  GetUserApi["PathParams"],
-  GetUserApi["ResponseBody"]
+  GetUserApi['PathParams'],
+  GetUserApi['ResponseBody']
 >(
-  "/api/users/:userId",
+  '/api/users/:userId',
   async (req, res) => {
     const { userId } = req.params;
     const user = await dao.getUser(userId);
@@ -172,66 +196,93 @@ usersRouter.get<
 );
 ```
 
-## Naive Approach - Client
+## The Result
 
-Here's a naive approach I see too often:
+Now let's see how different bugs are prevented at compile-time:
 
-```ts
-import axios from "axios";
+#### 1. Client Misuse of the API
 
-type User = {
-  userId: number;
-  name: string;
-};
+If the client references a nonexistent property, the code won't compile. For example:
 
-export const getUsers = async (): Promise<User[]> => {
-  const { data } = await axios.get("/api/users");
+```diff
+export const getUser = async (userId: number): Promise<User> => {
+  const { data } = await axios.get<GetUserApi['ResponseBody']>(
+    `/api/users/${userId}`
+  );
++ console.log(data.id);
   return data;
 };
 ```
 
-Here are reasons this is bad:
+This results in a compilation error:
 
-1. Our `getUsers` method actually provides _no_ type safety. (Axios will type the data as `any` by default.)
-2. Our server must, presumably, duplicate the exact same `User` type. These duplicate definitions are likely to drift apart over time.
+```
+Property 'id' does not exist on type 'User'
+```
 
-## Naive Approach - Server
+#### 2. Backwards-Incompatible Changes to the Spec
 
-Likewise, on the server I'll often see:
+If the spec is modified in a breaking way, the code won't compile. Say properties are replaced, like:
 
-One way to think about it is that types flow outward from the backend (which houses most business logic and interfaces with the database).
+```diff
+// shared-types/UsersApi.ts
+export type User = {
+  userId: number;
+- name: string;
++ firstName: string;
++ lastName: string;
+};
+```
 
-As with any type of sharing, questions of _ownership_ emerge. If the types are shared, who _owns_ them? My claim is that the backend, which houses most business logic, should own the application's models.
+The compiler will warn about any code still relying on `User['name']`, across client and server, with errors like:
 
-## Goals
+```
+Property 'name' does not exist on type 'User'.
+```
 
-Our goals are:
+#### 3. Backwards-Incompatible Changes to the Server
 
-1. The API _server_ shouldn't compile if it's modified in a way that breaks API clients.
-2. The API _client_ shouldn't compile if it's modified in a way that breaks itself.
+Say the server wants to modify a data type before sending it to the client:
 
-## Example
+```diff
+usersRouter.get<
+  GetUserApi['PathParams'],
+  GetUserApi['ResponseBody']
+ >('/api/users/:userId', async (req, res) => {
+  const { userId } = req.params;
+  const user = await dao.getUser(userId);
++ user.userId = user.userId.toString();
 
-## Serialization
+  res.status(200).json(user);
+});
+```
 
-## API Errors
+This causes compiler errors like:
 
-## GraphQL
+```
+Type 'string' is not assignable to type 'number'.
+```
 
-## Representing "no parameter" in TypeScript
+The API spec, client, and server must all be mutually compatible for any given change to compile.
 
-## Changes to build process
+## Conclusion
 
-Because the approach here relies only on referencing type declarations, which are erased at compile time, there are no changes to your build process.
+I like this approach to API contracts because it's pragmatic: it's lightweight, nonintrusive, broadly compatible, and can be introduced gradually. Feel free to play around with my [example repository](https://github.com/jonmellman/blog-examples/tree/master/typescript-for-api-contracts).
 
-## Drawbacks: Rollout
+This was just an introduction. In production use, you'll run into cases that I didn't touch on here like:
 
-Rollouts are often not atomic. That is, new code is typically deployed to some servers before others. And client-side code is often cached in the browser or CDN even after deployment. So, it's important to understand that might still be making a breaking change even if your API contract compiles.
+- Representing request bodies and querystrings in the API contract
+- Representing API errors in the contract itself
+- Serialization/deserialization of API types
+- Managing types for domain models used by many APIs
+- Properly representing nonexistent parameters
 
-Example where a server is on vN but the client is on vN-1: Deploying a new required property on the API, you update the client code and deploy in lockstep. Can you spot the problem? Clients still may be running older versions of the code depending on your cache policy. These clients would be making requests according to the _old_ version of your API, which didn't require this property. As a result, API calls from these clients will fail.
+If there's interest, I'll explore these in a followup. Cheers!
 
-Example where a client is on vN but the server is on vN-1: If you employ gradual rollouts, the release will reach some servers before others. It's possible that a new client fetches vN of the client code and its API calls get load balances to a server still on vN-1. This can be a problem if, say, the client code is sending a property that vN-1 doesn't understand.
+#### Appendix: Backwards-Incompatible Rollouts
 
-## Autogenerating from OAS
+Although this pattern prevents backward incompatibilities within any given version of the codebase, your rollout strategy might permit clients and servers to be on different versions.
 
-A little over a year ago, I did look into autogenerating TypeScript API clients and servers from an OpenAPI specification. At the time, the tooling seemed too immature. I hope this changes soon.
+For example, if your client bundle is cached in the CDN then, during rollout, your servers will be upgraded to version N while clients are still using the cached N-1. Similarly, a new client might load version N of the bundle before all servers have been upgraded from N-1.
+
+So, it's important to consider your rollout strategy - don't assume all your clients and all your servers will always be on the same version at the same time.
